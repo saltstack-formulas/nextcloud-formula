@@ -1,0 +1,15 @@
+########################################################################
+# File managed by Salt at <{{ source }}>.
+# Your changes will be overwritten.
+########################################################################
+
+{%- if nextcloud.websubdir %}
+Alias "{{ nextcloud.websubdir }}" "{{ nextcloud.webroot }}"
+{%- endif %}
+<Directory {{ nextcloud.webroot }}>
+  Require all granted
+  AllowOverride All
+
+  SetEnv HOME {{ nextcloud.webroot }}
+  SetEnv HTTP_HOME {{ nextcloud.webroot }}
+</Directory>

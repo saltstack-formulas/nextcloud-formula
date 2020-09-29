@@ -18,8 +18,11 @@ nextcloud-formula
    :scale: 100%
    :target: https://github.com/pre-commit/pre-commit
 
-A SaltStack formula that is empty. It has dummy content to help with a quick
-start on a new formula and it serves as a style guide.
+A SaltStack formula to manage a Nextcloud server.
+
+The scope of this formula is rather narrow. It manages only Nextcloud code and configuration.
+(We do not try to be smart and tell you how your Nextcloud setup should exactly look like.)
+Nginx, Apache, PHP, MySQL, MariaDB and PostgreSQL themselves are to be dealt with in their respective formulas, although this formula may provide ready-to-use snippets or configuration hints.
 
 .. contents:: **Table of Contents**
    :depth: 1
@@ -78,8 +81,7 @@ Available states
 *Meta-state (This is a state that includes other states)*.
 
 This installs the nextcloud package,
-manages the nextcloud configuration file and then
-starts the associated nextcloud service.
+manages the nextcloud configuration.
 
 ``nextcloud.package``
 ^^^^^^^^^^^^^^^^^^^^
@@ -89,13 +91,7 @@ This state will install the nextcloud package only.
 ``nextcloud.config``
 ^^^^^^^^^^^^^^^^^^^
 
-This state will configure the nextcloud service and has a dependency on ``nextcloud.install``
-via include list.
-
-``nextcloud.service``
-^^^^^^^^^^^^^^^^^^^^
-
-This state will start the nextcloud service and has a dependency on ``nextcloud.config``
+This state will configure nextcloud and has a dependency on ``nextcloud.install``
 via include list.
 
 ``nextcloud.clean``
@@ -104,20 +100,13 @@ via include list.
 *Meta-state (This is a state that includes other states)*.
 
 this state will undo everything performed in the ``nextcloud`` meta-state in reverse order, i.e.
-stops the service,
 removes the configuration file and
 then uninstalls the package.
-
-``nextcloud.service.clean``
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-This state will stop the nextcloud service and disable it at boot time.
 
 ``nextcloud.config.clean``
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This state will remove the configuration of the nextcloud service and has a
-dependency on ``nextcloud.service.clean`` via include list.
+This state will remove the configuration of nextcloud.
 
 ``nextcloud.package.clean``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -125,27 +114,25 @@ dependency on ``nextcloud.service.clean`` via include list.
 This state will remove the nextcloud package and has a depency on
 ``nextcloud.config.clean`` via include list.
 
-``nextcloud.subcomponent``
-^^^^^^^^^^^^^^^^^^^^^^^^^
+``nextcloud.apache``
+^^^^^^^^^^^^^^^^^^^^
 
 *Meta-state (This is a state that includes other states)*.
 
-This state installs a subcomponent configuration file before
-configuring and starting the nextcloud service.
+This state installs a Apache configuration file for you to include.
+Changes in the snippet trigger a reload of the webserver.
 
-``nextcloud.subcomponent.config``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+``nextcloud.apache.config``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This state will configure the nextcloud subcomponent and has a
+This state will create a config snippet for Apache and has a
 dependency on ``nextcloud.config`` via include list.
 
-``nextcloud.subcomponent.config.clean``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+``nextcloud.apache.config.clean``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This state will remove the configuration of the nextcloud subcomponent
-and reload the nextcloud service by a dependency on
-``nextcloud.service.running`` via include list and ``watch_in``
-requisite.
+This state will remove the Apache config snippet
+and reload the webserver.
 
 Testing
 -------

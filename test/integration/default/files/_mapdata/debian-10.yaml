@@ -4,20 +4,31 @@
 added_in_defaults: defaults_value
 added_in_lookup: lookup_value
 added_in_pillar: pillar_value
+apache:
+  config_snippet: /etc/apache2/nextcloud-snippet.conf
+  trigger_reload: false
 arch: amd64
-config: /etc/template-formula.conf
+archive:
+  name: latest-19
+database:
+  driver: sqlite
+  name: nextcloud
+initial_admin_credentials:
+  email: admin@nextcloud.test
+  user: admin
+install_mode: archive
 lookup:
   added_in_lookup: lookup_value
-  master: template-master
   winner: lookup
-master: template-master
+php_executable: /usr/bin/php
 pkg:
-  name: bash
+  name: nextcloud
 rootgroup: root
-service:
-  name: systemd-journald
-subcomponent:
-  config: /etc/nextcloud-subcomponent-formula.conf
+salt_managed_config:
+  appcodechecker: true
+  htaccess.RewriteBase: /
+  memcache.local: \OC\Memcache\APCu
+  updatechecker: true
 tofs:
   files_switch:
   - any/path/can/be/used/here
@@ -31,4 +42,7 @@ tofs:
     - example.tmpl.jinja
     nextcloud-subcomponent-config-file-file-managed:
     - subcomponent-example.tmpl.jinja
+webroot: /var/www/nextcloud
+websubdir: false
+webuser: www-data
 winner: pillar

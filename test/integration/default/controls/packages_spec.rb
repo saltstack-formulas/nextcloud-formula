@@ -1,21 +1,42 @@
 # frozen_string_literal: true
 
-# Prepare platform "finger"
-platform_finger = system.platform[:finger].split('.').first.to_s
-
 control 'nextcloud package' do
   title 'should be installed'
 
-  # Overide by `platform_finger`
   package_name =
-    case platform_finger
-    when 'centos-6', 'amazonlinux-1'
-      'cronie'
-    else
-      'bash'
+    case system.platform[:family]
+    when 'FreeBSD'
+      'nextcloud-php74'
     end
 
-  describe package(package_name) do
-    it { should be_installed }
+  webroot =
+    if system.platform[:family] == 'FreeBSD'
+      '/usr/local/www/nextcloud'
+    else
+      '/var/www/nextcloud'
+    end
+
+  webuser =
+    if system.platform[:family] == 'FreeBSD'
+      'www'
+    else
+      'www-data'
+    end
+
+  if package_name
+    describe package(package_name) do
+      it { should be_installed }
+    end
+  end
+
+  describe file(webroot) do
+    it { should be_directory }
+    its('mode') { should cmp '0755' }
+  end
+
+  describe file("#{webroot}/config") do
+    it { should be_directory }
+    it { should be_owned_by webuser }
+    its('mode') { should cmp '0755' }
   end
 end

@@ -12,8 +12,8 @@ include:
 
 nextcloud-config-file-file-managed:
   file.managed:
-    - name: {{ nextcloud.config }}
-    - source: {{ files_switch(['example.tmpl'],
+    - name: {{ nextcloud.webroot }}/config/salt-managed.config.php
+    - source: {{ files_switch(['salt-managed.config.php.tmpl.jinja'],
                               lookup='nextcloud-config-file-file-managed'
                  )
               }}

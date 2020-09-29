@@ -3,34 +3,30 @@
 control 'nextcloud configuration' do
   title 'should match desired lines'
 
-  describe file('/etc/template-formula.conf') do
+  webroot =
+    if system.platform[:family] == 'FreeBSD'
+      '/usr/local/www/nextcloud'
+    else
+      '/var/www/nextcloud'
+    end
+
+  describe file("#{webroot}/config/salt-managed.config.php") do
     it { should be_file }
     it { should be_owned_by 'root' }
     it { should be_grouped_into 'root' }
     its('mode') { should cmp '0644' }
     its('content') do
       should include(
-        'This is another example file from SaltStack template-formula.'
+        'File managed by Salt'
       )
     end
-    its('content') { should include '"added_in_pillar": "pillar_value"' }
-    its('content') { should include '"added_in_defaults": "defaults_value"' }
-    its('content') { should include '"added_in_lookup": "lookup_value"' }
-    its('content') { should include '"config": "/etc/template-formula.conf"' }
-    its('content') { should include '"lookup": {"added_in_lookup": "lookup_value",' }
-    its('content') { should include '"pkg": {"name": "' }
-    its('content') { should include '"service": {"name": "' }
+    its('content') { should include '"appcodechecker" => true,' }
+    its('content') { should include '"htaccess.RewriteBase" => "/",' }
     its('content') do
       should include(
-        '"tofs": {"files_switch": ["any/path/can/be/used/here", "id", '\
-        '"roles", "osfinger", "os", "os_family"], "source_files": '\
-        '{"nextcloud-config-file-file-managed": ["example.tmpl.jinja"], '\
-        '"nextcloud-subcomponent-config-file-file-managed": '\
-        '["subcomponent-example.tmpl.jinja"]}'
+        '"memcache.local" => "\\\\OC\\\\Memcache\\\\APCu",'
       )
     end
-    its('content') { should include '"arch": "amd64"' }
-    its('content') { should include '"winner": "pillar"}' }
-    its('content') { should include 'winner of the merge: pillar' }
+    its('content') { should include '"updatechecker" => true,' }
   end
 end

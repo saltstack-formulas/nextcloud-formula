@@ -23,9 +23,18 @@ Arch: {}
 Alpine: {}
 
 FreeBSD:
+  install_mode: pkg
   pkg:
     name: nextcloud-php74
+  php_executable: /usr/local/bin/php
   rootgroup: wheel
+  webroot: /usr/local/www/nextcloud
+  webuser: www
+  websubdir: /nextcloud
+  salt_managed_config:
+    'htaccess.RewriteBase': '/nextcloud/'
+  apache:
+    config_snippet: '/usr/local/etc/apache24/extra/nextcloud-snippet.conf'
 
 OpenBSD:
   rootgroup: wheel

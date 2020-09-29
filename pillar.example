@@ -3,19 +3,49 @@
 ---
 nextcloud:
   lookup:
-    master: template-master
     # Just for testing purposes
     winner: lookup
     added_in_lookup: lookup_value
 
-  # Using bash package and udev service as an example. This allows us to
-  # test the template formula itself. You should set these parameters to
-  # examples that make sense in the contexto of the formula you're writing.
+  php_executable: /usr/bin/php
+  rootgroup: root
+
+  # Default: webroot + '/data'
+  # datadir: /var/www/nextcloud/data
+  webuser: www-data
+  webroot: /var/www/nextcloud
+  # nextcloud/ in some installations
+  websubdir: false
+
+  # Installation
+  # archive or pkg
+  install_mode: archive
+  archive:
+    name: latest-19
   pkg:
-    name: bash
-  service:
-    name: systemd-journald
-  config: /etc/template-formula.conf
+    name: nextcloud
+
+  # The defaults from 'occ maintenance:install'
+  database:
+    driver: sqlite
+    name: nextcloud
+    # Not relevant for sqlite
+    # host: localhost
+    # port: 5432
+    # user: nextcloud
+    # pass: password
+    # table-prefix: oc_
+    # table-space:
+  initial_admin_credentials:
+    user: admin
+    # pass: password
+    email: admin@nextcloud.test
+
+  salt_managed_config:
+    'htaccess.RewriteBase': '/'
+    appcodechecker: true
+    updatechecker: true
+    'memcache.local': '\OC\Memcache\APCu'
 
   tofs:
     # The files_switch key serves as a selector for alternative
@@ -51,6 +81,15 @@ nextcloud:
         - 'example.tmpl.jinja'
       nextcloud-subcomponent-config-file-file-managed:
         - 'subcomponent-example.tmpl.jinja'
+
+  ##
+  # nextcloud.apache
+  # Apache config snippet
+  apache:
+    config_snippet: /etc/apache2/nextcloud-snippet.conf
+    # Assumes you're using apache-formula
+    # defaults to true
+    trigger_reload: false
 
   # Just for testing purposes
   winner: pillar

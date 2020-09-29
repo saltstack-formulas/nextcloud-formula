@@ -3,3 +3,5 @@
 
 include:
   - .file
+  - .install_or_upgrade
+  - .htaccess

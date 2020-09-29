@@ -4,3 +4,4 @@
 include:
   - .package
   - .config
+  - .cron

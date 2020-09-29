@@ -2,10 +2,47 @@
 # vim: ft=yaml
 ---
 nextcloud:
+  # archive or pkg
+  install_mode: archive
   pkg:
     name: nextcloud
+  archive:
+    # See https://download.nextcloud.com/server/releases/
+    name: latest-19
+  # The defaults from 'occ maintenance:install'
+  database:
+    driver: sqlite
+    name: nextcloud
+    # Not relevant for sqlite
+    # host: localhost
+    # port: 5432
+    # user: nextcloud
+    # pass: password
+    # table-prefix: oc_
+    # table-space:
+  initial_admin_credentials:
+    user: admin
+    # pass: password
+    email: admin@nextcloud.test
+
+  php_executable: /usr/bin/php
   rootgroup: root
-  config: '/etc/nextcloud'
+  webroot: /var/www/nextcloud
+  # Default: webroot + '/data'
+  # datadir: /var/www/nextcloud/data
+  # nextcloud/ in some installations
+  websubdir: false
+  webuser: www-data
+  salt_managed_config:
+    'htaccess.RewriteBase': '/'
+    appcodechecker: true
+    updatechecker: true
+    'memcache.local': '\OC\Memcache\APCu'
+  apache:
+    config_snippet: '/etc/apache2/nextcloud-snippet.conf'
+    # Assumes you're using apache-formula
+    trigger_reload: true
+
   # Just here for testing
   added_in_defaults: defaults_value
   winner: defaults

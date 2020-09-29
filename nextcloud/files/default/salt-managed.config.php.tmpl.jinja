@@ -1,0 +1,11 @@
+<?php
+//########################################################################
+//# File managed by Salt at <{{ source }}>.
+//# Your changes will be overwritten.
+//########################################################################
+
+$CONFIG = array (
+{%- for key, value in nextcloud.salt_managed_config.items() %}
+{{ '  ' }}"{{ key }}" => {{ value | yaml_encode }},
+{%- endfor %}
+);

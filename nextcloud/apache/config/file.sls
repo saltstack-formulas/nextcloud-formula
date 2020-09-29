@@ -10,11 +10,11 @@
 include:
   - {{ sls_config_file }}
 
-nextcloud-subcomponent-config-file-file-managed:
+nextcloud-apache-config-file-file-managed:
   file.managed:
-    - name: {{ nextcloud.subcomponent.config }}
-    - source: {{ files_switch(['subcomponent-example.tmpl'],
-                              lookup='nextcloud-subcomponent-config-file-file-managed',
+    - name: {{ nextcloud.apache.config_snippet }}
+    - source: {{ files_switch(['nextcloud-snippet.conf.tmpl.jinja'],
+                              lookup='nextcloud-apache-config-file-file-managed',
                               use_subpath=True
                  )
               }}
@@ -23,5 +23,11 @@ nextcloud-subcomponent-config-file-file-managed:
     - group: {{ nextcloud.rootgroup }}
     - makedirs: True
     - template: jinja
+    - context:
+        nextcloud: {{ nextcloud | json }}
     - require_in:
       - sls: {{ sls_config_file }}
+{%- if nextcloud.apache.trigger_reload %}
+    - watch_in:
+      - module: apache-reload
+{%- endif %}
