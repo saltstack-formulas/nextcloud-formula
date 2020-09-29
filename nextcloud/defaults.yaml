@@ -6,10 +6,6 @@ nextcloud:
     name: nextcloud
   rootgroup: root
   config: '/etc/nextcloud'
-  service:
-    name: nextcloud
-  subcomponent:
-    config: '/etc/nextcloud-subcomponent-formula.conf'
   # Just here for testing
   added_in_defaults: defaults_value
   winner: defaults

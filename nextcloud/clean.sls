@@ -3,6 +3,5 @@
 
 include:
   - .subcomponent.clean
-  - .service.clean
   - .config.clean
   - .package.clean

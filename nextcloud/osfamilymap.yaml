@@ -10,31 +10,21 @@
 # you will need to provide at least an empty dict in this file, e.g.
 # osfamilymap: {}
 ---
-Debian:
-  pkg:
-    name: nextcloud-debian
-  config: /etc/nextcloud.d/custom.conf
+Debian: {}
 
-RedHat:
-  pkg:
-    name: nextcloud-redhat
-  config: /etc/nextcloud.conf
+RedHat: {}
 
-Suse:
-  pkg:
-    name: nextcloud-suse
+Suse: {}
 
 Gentoo: {}
 
-Arch:
-  pkg:
-    name: nextcloud-arch
-  service:
-    name: service-arch
+Arch: {}
 
 Alpine: {}
 
 FreeBSD:
+  pkg:
+    name: nextcloud-php74
   rootgroup: wheel
 
 OpenBSD:
