@@ -173,7 +173,7 @@ provisioner:
   log_level: debug
   salt_install: none
   require_chef: false
-  formula: TEMPLATE
+  formula: nextcloud
   salt_copy_filter:
     - .kitchen
     - .git
@@ -195,16 +195,16 @@ suites:
       state_top:
         base:
           '*':
-            - TEMPLATE._mapdata
-            - TEMPLATE
+            - nextcloud._mapdata
+            - nextcloud
       pillars:
         top.sls:
           base:
             '*':
-              - TEMPLATE
+              - nextcloud
               - define_roles
       pillars_from_files:
-        TEMPLATE.sls: pillar.example
+        nextcloud.sls: pillar.example
         define_roles.sls: test/salt/pillar/define_roles.sls
     verifier:
       inspec_tests:
@@ -217,16 +217,16 @@ suites:
       state_top:
         base:
           '*':
-            - TEMPLATE._mapdata
-            - TEMPLATE
+            - nextcloud._mapdata
+            - nextcloud
       pillars:
         top.sls:
           base:
             '*':
-              - TEMPLATE
+              - nextcloud
               - define_roles
       pillars_from_files:
-        TEMPLATE.sls: test/salt/pillar/upstart.sls
+        nextcloud.sls: test/salt/pillar/upstart.sls
         define_roles.sls: test/salt/pillar/define_roles.sls
     verifier:
       inspec_tests:

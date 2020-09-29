@@ -12,23 +12,23 @@
 ---
 Debian:
   pkg:
-    name: TEMPLATE-debian
-  config: /etc/TEMPLATE.d/custom.conf
+    name: nextcloud-debian
+  config: /etc/nextcloud.d/custom.conf
 
 RedHat:
   pkg:
-    name: TEMPLATE-redhat
-  config: /etc/TEMPLATE.conf
+    name: nextcloud-redhat
+  config: /etc/nextcloud.conf
 
 Suse:
   pkg:
-    name: TEMPLATE-suse
+    name: nextcloud-suse
 
 Gentoo: {}
 
 Arch:
   pkg:
-    name: TEMPLATE-arch
+    name: nextcloud-arch
   service:
     name: service-arch
 

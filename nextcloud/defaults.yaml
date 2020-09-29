@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 # vim: ft=yaml
 ---
-TEMPLATE:
+nextcloud:
   pkg:
-    name: TEMPLATE
+    name: nextcloud
   rootgroup: root
-  config: '/etc/TEMPLATE'
+  config: '/etc/nextcloud'
   service:
-    name: TEMPLATE
+    name: nextcloud
   subcomponent:
-    config: '/etc/TEMPLATE-subcomponent-formula.conf'
+    config: '/etc/nextcloud-subcomponent-formula.conf'
   # Just here for testing
   added_in_defaults: defaults_value
   winner: defaults

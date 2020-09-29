@@ -13,14 +13,14 @@
 # os_family: Debian
 Ubuntu:
   pkg:
-    name: TEMPLATE-ubuntu
-  config: /etc/TEMPLATE.d/custom-ubuntu.conf
+    name: nextcloud-ubuntu
+  config: /etc/nextcloud.d/custom-ubuntu.conf
 Raspbian: {}
 
 # os_family: RedHat
 Fedora:
   pkg:
-    name: TEMPLATE-fedora
+    name: nextcloud-fedora
   service:
     name: service-fedora
 CentOS: {}

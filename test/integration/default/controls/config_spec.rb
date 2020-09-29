@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-control 'TEMPLATE configuration' do
+control 'nextcloud configuration' do
   title 'should match desired lines'
 
   describe file('/etc/template-formula.conf') do
@@ -24,8 +24,8 @@ control 'TEMPLATE configuration' do
       should include(
         '"tofs": {"files_switch": ["any/path/can/be/used/here", "id", '\
         '"roles", "osfinger", "os", "os_family"], "source_files": '\
-        '{"TEMPLATE-config-file-file-managed": ["example.tmpl.jinja"], '\
-        '"TEMPLATE-subcomponent-config-file-file-managed": '\
+        '{"nextcloud-config-file-file-managed": ["example.tmpl.jinja"], '\
+        '"nextcloud-subcomponent-config-file-file-managed": '\
         '["subcomponent-example.tmpl.jinja"]}'
       )
     end
