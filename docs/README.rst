@@ -134,6 +134,16 @@ dependency on ``nextcloud.config`` via include list.
 This state will remove the Apache config snippet
 and reload the webserver.
 
+``nextcloud.client``
+^^^^^^^^^^^^^^^^^^^^
+
+This state will install the Nextcloud client.
+
+``nextcloud.client.remove``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This state will remove the Nextcloud client.
+
 Testing
 -------
 

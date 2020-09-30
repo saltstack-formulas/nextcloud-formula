@@ -43,6 +43,12 @@ nextcloud:
     # Assumes you're using apache-formula
     trigger_reload: true
 
+  client:
+    pkgs:
+      - nextcloud-desktop
+      - nextcloud-desktop-cmd
+      - nextcloud-desktop-l10n
+
   # Just here for testing
   added_in_defaults: defaults_value
   winner: defaults

@@ -10,6 +10,11 @@ apache:
 arch: amd64
 archive:
   name: latest-19
+client:
+  pkgs:
+  - nextcloud-desktop
+  - nextcloud-desktop-cmd
+  - nextcloud-desktop-l10n
 database:
   driver: sqlite
   name: nextcloud

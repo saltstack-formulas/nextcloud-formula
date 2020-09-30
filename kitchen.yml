@@ -75,6 +75,7 @@ suites:
             - nextcloud._mapdata
             - nextcloud
             - nextcloud.apache
+            - nextcloud.client
       pillars:
         top.sls:
           base:
