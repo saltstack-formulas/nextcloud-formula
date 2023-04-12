@@ -29,5 +29,6 @@ nextcloud-apache-config-file-file-managed:
       - sls: {{ sls_config_file }}
 {%- if nextcloud.apache.trigger_reload %}
     - watch_in:
-      - module: apache-reload
+      - module: apache-service-running-restart
+      - service: apache-service-running
 {%- endif %}
