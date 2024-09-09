@@ -24,6 +24,8 @@ nextcloud:
     name: latest-19
   pkg:
     name: nextcloud
+  # Whether to use the official PPA in the case of Ubuntu; default: True
+  use_ppa: True
 
   # The defaults from 'occ maintenance:install'
   database:
